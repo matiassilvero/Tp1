@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace Tp_1
 {
-    internal class Categoria
+    public class Categoria
     {
-        int idCategoria;
-        string descripcionCategoria;
+        public int ID { get; set; }
+        public string Descripcion { get; set; }
+
+        public override string ToString()
+        {
+            return Descripcion;
+        }
     }
 }

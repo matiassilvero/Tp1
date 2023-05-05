@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
 
 namespace Negocio
 {
-    public class AccesoDatos
+    internal class AccesoDatos
     {
         private SqlConnection conexion;
         private SqlCommand comando;
         private SqlDataReader lector;
+
 
         public SqlDataReader Lector
         {
@@ -20,7 +21,8 @@ namespace Negocio
 
         public AccesoDatos()
         {
-            conexion = new SqlConnection("data source=. \\ sqlexpress; initial catalog= CATALOGO_DB_v3 ; integrated security=sspi"); 
+            conexion = new SqlConnection("data source=localhost; initial catalog= CATALOGO_P3_DB ; integrated security=sspi");
+            //conexion = new SqlConnection("data source= .\\sqlexpress;Initial Catalog=CATALOGO_P3_DB;Persist Security Info=True;User ID=usuario;Password=password\"");
             comando = new SqlCommand();
         }
 
@@ -50,8 +52,9 @@ namespace Negocio
         {
             if (lector != null)
                 lector.Close();
-            conexion.Close(); 
+            conexion.Close();
         }
 
     }
 }
+

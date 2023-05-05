@@ -64,6 +64,7 @@
             this.dgvLista.Name = "dgvLista";
             this.dgvLista.Size = new System.Drawing.Size(380, 331);
             this.dgvLista.TabIndex = 2;
+            this.dgvLista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellContentClick);
             // 
             // btnAgregar
             // 
@@ -131,6 +132,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Comercio Rocket";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvLista)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbArticulo)).EndInit();
             this.ResumeLayout(false);

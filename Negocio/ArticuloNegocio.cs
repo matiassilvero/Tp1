@@ -140,7 +140,7 @@ namespace Negocio
         public void agregar(Articulo nuevo)
         {
             AccesoDatos acceso = new AccesoDatos();
-            List<Articulo> lista = new List<Articulo>();
+            //List<Articulo> lista = new List<Articulo>();
 
             //SqlConnection conexion = new SqlConnection();
             //SqlCommand comando = new SqlCommand();
@@ -172,7 +172,7 @@ namespace Negocio
         public void modificar(Articulo existente)
         {
             AccesoDatos acceso = new AccesoDatos();
-            List<Articulo> lista = new List<Articulo>();
+            //List<Articulo> lista = new List<Articulo>();
 
             //SqlConnection conexion = new SqlConnection();
             //SqlCommand comando = new SqlCommand();
@@ -180,6 +180,7 @@ namespace Negocio
             try
             {
                 acceso.setearConsulta("Update ARTICULOS set Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, IdCategoria = @IdCategoria, IdMarca = @IdMarca, Precio = @Precio where Id = @Id");
+                acceso.Comando.Parameters.AddWithValue("@Id", existente.ID);
                 acceso.Comando.Parameters.AddWithValue("@Codigo", existente.Codigo);
                 acceso.Comando.Parameters.AddWithValue("@Nombre", existente.Nombre);
                 acceso.Comando.Parameters.AddWithValue("@Descripcion", existente.Descripcion);
@@ -189,6 +190,7 @@ namespace Negocio
                 acceso.Comando.Parameters.AddWithValue("@Precio", existente.Precio);
 
                 acceso.ejecutarLectura();
+                //acceso.Comando.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

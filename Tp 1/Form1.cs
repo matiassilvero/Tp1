@@ -72,6 +72,17 @@ namespace Tp_1
             cargar();
         }
 
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Articulo artic;
+            artic = (Articulo)dgvLista.CurrentRow.DataBoundItem;
 
+
+            //Agregar modificar = new Agregar(artic);     // el nuevo constructor pasa los datos del actual elemento 
+            Modificar modificar = new Modificar(artic);
+            modificar.Text = "Modificar";
+            modificar.ShowDialog();
+            cargar();
+        }
     }
 }

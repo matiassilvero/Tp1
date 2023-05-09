@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -16,7 +18,8 @@ namespace Negocio
             AccesoDatos acceso = new AccesoDatos();
             try
             {
-                acceso.setearConsulta("Select A.ID, A.Codigo Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion Categoria, C.Id IdCategoria, M.Id IdMarca, M.Descripcion Marca From ARTICULOS A join CATEGORIAS C on A.IdCategoria = C.Id join MARCAS M on A.IdMarca = M.Id");
+                //acceso.setearConsulta("Select A.ID, A.Codigo Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion Categoria, C.Id IdCategoria, M.Id IdMarca, M.Descripcion Marca, I.Id IdImagen, I.ImagenUrl ImagenUrl From ARTICULOS A join CATEGORIAS C on A.IdCategoria = C.Id join MARCAS M on A.IdMarca = M.Id join IMAGENES I on A.Id = I.IdArticulo");
+                acceso.setearConsulta("Select A.ID, A.Codigo Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion Categoria, C.Id IdCategoria, M.Id IdMarca, M.Descripcion Marca From ARTICULOS A join CATEGORIAS C on A.IdCategoria = C.Id join MARCAS M on A.IdMarca = M.Id"); 
                 acceso.ejecutarLectura();
                 List<Articulo> lista = new List<Articulo>();
                 while (acceso.Lector.Read())
@@ -32,10 +35,7 @@ namespace Negocio
                     aux.Descripcion = (string)acceso.Lector["Descripcion"];
 
                     aux.Precio = (decimal)acceso.Lector["Precio"];
-
                     //aux.Precio = acceso.Lector.GetSqlMoney(5);
-
-
 
                     aux.Categoria = new Categoria();
                     aux.Categoria.Descripcion = (string)acceso.Lector["Categoria"];
@@ -44,6 +44,9 @@ namespace Negocio
                     aux.Marca = new Marca();
                     aux.Marca.Descripcion = (string)acceso.Lector["Marca"];
                     aux.Marca.ID = (int)acceso.Lector["IdMarca"];
+
+                    //aux.ImagenUrl = new Imagen();
+                    //aux.ImagenUrl.ImagenUrl = (string)acceso.Lector["ImagenUrl"];
 
                     lista.Add(aux);
                 }
@@ -63,5 +66,176 @@ namespace Negocio
             }
         }
         //fin del método listar(), el cual hace la consulta y devuelve la lista;
+
+
+        //Métodos empleados por el Forma Agregar para los cboBox:
+        public List<Categoria> listarCategorias()
+        {
+            AccesoDatos acceso = new AccesoDatos();
+            try
+            {
+                acceso.setearConsulta("SELECT * FROM CATEGORIAS");
+                acceso.ejecutarLectura();
+                List<Categoria> categoria = new List<Categoria>();
+
+                while (acceso.Lector.Read())
+                {
+                    Categoria cat = new Categoria();
+                    //aux.ID = (int)lector["Id"];
+                    cat.Descripcion = (string)acceso.Lector["Descripcion"];
+                    cat.ID = (int)acceso.Lector["Id"];
+
+                    categoria.Add(cat);
+                }
+                acceso.cerrarConexion();
+                return categoria;
+            }
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            finally
+            {
+                acceso.cerrarConexion();
+            }
+        }
+
+
+            public List<Marca> listarMarca()
+            {
+            AccesoDatos acceso = new AccesoDatos();
+            try
+            {
+                acceso.setearConsulta("SELECT * FROM MARCAS");
+                acceso.ejecutarLectura();
+                List<Marca> marca = new List<Marca>();
+
+                while (acceso.Lector.Read())
+                {
+                    Marca mar  = new Marca();
+                    //aux.ID = (int)lector["Id"];
+                   mar.ID = (int)acceso.Lector["Id"];
+                   mar.Descripcion = (string)acceso.Lector["Descripcion"];
+
+                    marca.Add(mar);
+                }
+                acceso.cerrarConexion();
+                return marca;
+            }
+
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            finally
+            {
+                acceso.cerrarConexion();
+            }
+        }
+
+        //Métodos agregar y modificar, empleados en primera instancia por el Form Agregar
+        public void agregar(Articulo nuevo)
+        {
+            AccesoDatos acceso = new AccesoDatos();
+            List<Articulo> lista = new List<Articulo>();
+
+            //SqlConnection conexion = new SqlConnection();
+            //SqlCommand comando = new SqlCommand();
+           
+            try
+            {
+                acceso.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdCategoria, IdMarca, Precio) Values (@Codigo, @Nombre, @Descripcion, @IdCategoria, @IdMarca, @Precio)");
+                acceso.Comando.Parameters.AddWithValue("@Codigo", nuevo.Codigo);
+                acceso.Comando.Parameters.AddWithValue("@Nombre", nuevo.Nombre);
+                acceso.Comando.Parameters.AddWithValue("@Descripcion", nuevo.Descripcion);
+                //comando.Parameters.AddWithValue("@ImagenUrl", nuevo.ImagenUrl.ImagenUrl);
+                acceso.Comando.Parameters.AddWithValue("@IdCategoria", nuevo.Categoria.ID);
+                acceso.Comando.Parameters.AddWithValue("@IdMarca", nuevo.Marca.ID);
+                acceso.Comando.Parameters.AddWithValue("@Precio", nuevo.Precio);
+                
+                acceso.ejecutarLectura();
+                
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                acceso.cerrarConexion();
+            }
+        }
+
+        public void modificar(Articulo existente)
+        {
+            AccesoDatos acceso = new AccesoDatos();
+            List<Articulo> lista = new List<Articulo>();
+
+            //SqlConnection conexion = new SqlConnection();
+            //SqlCommand comando = new SqlCommand();
+
+            try
+            {
+                acceso.setearConsulta("Update ARTICULOS set Codigo = @Codigo, Nombre = @Nombre, Descripcion = @Descripcion, IdCategoria = @IdCategoria, IdMarca = @IdMarca, Precio = @Precio where Id = @Id");
+                acceso.Comando.Parameters.AddWithValue("@Codigo", existente.Codigo);
+                acceso.Comando.Parameters.AddWithValue("@Nombre", existente.Nombre);
+                acceso.Comando.Parameters.AddWithValue("@Descripcion", existente.Descripcion);
+                //comando.Parameters.AddWithValue("@ImagenUrl", nuevo.ImagenUrl.ImagenUrl);
+                acceso.Comando.Parameters.AddWithValue("@IdCategoria", existente.Categoria.ID);
+                acceso.Comando.Parameters.AddWithValue("@IdMarca", existente.Marca.ID);
+                acceso.Comando.Parameters.AddWithValue("@Precio", existente.Precio);
+
+                acceso.ejecutarLectura();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            finally
+            {
+                acceso.cerrarConexion();
+            }
+        }
+
+
+
+        //public void modificar(Articulo artic)
+        //{
+        //    AccesoDatos acceso = new AccesoDatos();
+        //    List<Articulo> lista = new List<Articulo>();
+
+        //    SqlConnection conexion = new SqlConnection();
+        //    SqlCommand comando = new SqlCommand();
+
+
+        //    try
+        //    {
+        //        acceso.setearConsulta("Update ARTICULOS set Codigo=@Codigo, Nombre=@Nombre, Descripcion=@Descripcion, IdCategoria=@IdCategoria, IdMarca=@IdMarca, Precio=@Precio where Id=@Id");
+
+        //        comando.Parameters.AddWithValue("@Id", artic.ID);
+        //        comando.Parameters.AddWithValue("@Codigo", artic.Codigo);
+        //        comando.Parameters.AddWithValue("@Nombre", artic.Nombre);
+        //        comando.Parameters.AddWithValue("@Descripcion", artic.Descripcion);               
+        //        //comando.Parameters.AddWithValue("@ImagenUrl", artic.ImagenUrl.ImagenUrl);
+        //        comando.Parameters.AddWithValue("@IdCategoria", artic.Categoria.ID);
+        //        comando.Parameters.AddWithValue("@IdMarca", artic.Marca.ID);
+        //        comando.Parameters.AddWithValue("@Precio", artic.Precio);
+        //        comando.Connection = conexion;
+
+        //        conexion.Open();
+        //        comando.ExecuteNonQuery();
+        //    }
+
+        //    catch (Exception ex)
+        //    {
+        //        throw;
+        //    }
+
+        //}
+
+
     }
 }

@@ -13,7 +13,9 @@ namespace Negocio
         private SqlCommand comando;
         private SqlDataReader lector;
 
-
+        public SqlCommand Comando
+        { get { return comando; } 
+        }
         public SqlDataReader Lector
         {
             get { return lector; }

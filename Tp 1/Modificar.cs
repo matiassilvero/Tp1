@@ -12,23 +12,23 @@ using System.Windows.Forms;
 
 namespace Tp_1
 {
-    public partial class Agregar : Form
+    public partial class Modificar : Form
     {
         private Articulo articulo = null;
         private List<Articulo> listaOriginal;
 
-        public Agregar()
+        public Modificar()
         {
             InitializeComponent();
         }
 
-        public Agregar(Articulo artic)
+        public Modificar(Articulo artic)
         {
             InitializeComponent();
             articulo = artic;
         }
 
-        private void Agregar_Load(object sender, EventArgs e)
+        private void Modificar_Load(object sender, EventArgs e)
         {
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
             cboMarca.DataSource = articuloNegocio.listarMarca();
@@ -56,12 +56,12 @@ namespace Tp_1
             }
         }
 
-        private void btnCancelarAgregar_Click(object sender, EventArgs e)
+        private void btnCancelarModificar_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void btnAceptarAgregar_Click(object sender, EventArgs e)
+        private void btnAceptarModificar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -81,17 +81,17 @@ namespace Tp_1
                 //articulo.ImagenUrl = (Imagen)txtImagenUrl.Text;
 
                               
-                listaOriginal = negocio.listar();
-                foreach (Articulo var in listaOriginal)
-                {
-                    if (articulo.Codigo == var.Codigo)
-                    {
-                        MessageBox.Show("Código de artículo repetido. Revise el código o utilice la función 'Modificar'", "Artículo repetido");
-                        Close();
-                        return;                       
-                    }
-                }
-                negocio.agregar(articulo);
+                //listaOriginal = negocio.listar();
+                //foreach (Articulo var in listaOriginal)
+                //{
+                //    if (articulo.Codigo == var.Codigo)
+                //    {
+                //        MessageBox.Show("Código de artículo repetido. Revise el código o utilice la función 'Modificar'", "Artículo repetido");
+                //        Close();
+                //        return;                       
+                //    }
+                //}
+                negocio.modificar(articulo);
                 MessageBox.Show("Operación realizada exitosamente", "Éxito");
                 Close();
             }

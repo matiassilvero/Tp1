@@ -16,6 +16,9 @@ namespace Dominio
         public string Descripcion { get; set; }
         public Marca Marca { get; set; }
         public Categoria Categoria { get; set; }
+
+        public Imagen ImagenUrl { get; set; }
+
         //public string ImgURL { get; set; }    //esta base no emplea la URL directa, aunque la anterior sí lo tenía directo como atributo.
         //En este caso, habrá que hacer una nueva consulta a la tabla IMAGENES
 

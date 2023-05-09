@@ -16,6 +16,7 @@ namespace Tp_1
 
     {
         private List<Articulo> listaOriginal;
+
         public Form1()
         {
             InitializeComponent();
@@ -45,9 +46,32 @@ namespace Tp_1
             //dgvLista.Columns[0].Visible = false; permite no mostrar una columna en el Form
         }
 
+        //tanto el Load del Form como este tendrían que traer la imagen, pero no lo hace... mmm
+        private void dgvLista_SelectionChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                Articulo articulo = (Articulo)dgvLista.CurrentRow.DataBoundItem;
+                pbArticulo.Load(articulo.ImagenUrl.ImagenUrl);
+            }
+            catch (Exception)
+            {
+
+            }
+
+        }
         private void dgvLista_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Agregar alta = new Agregar();
+            alta.ShowDialog();
+            cargar();
+        }
+
+
     }
 }

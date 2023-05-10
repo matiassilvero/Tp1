@@ -19,7 +19,7 @@ namespace Negocio
             try
             {
                 //acceso.setearConsulta("Select A.ID, A.Codigo Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion Categoria, C.Id IdCategoria, M.Id IdMarca, M.Descripcion Marca, I.Id IdImagen, I.ImagenUrl ImagenUrl From ARTICULOS A join CATEGORIAS C on A.IdCategoria = C.Id join MARCAS M on A.IdMarca = M.Id join IMAGENES I on A.Id = I.IdArticulo");
-                acceso.setearConsulta("Select A.ID, A.Codigo Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion Categoria, C.Id IdCategoria, M.Id IdMarca, M.Descripcion Marca From ARTICULOS A join CATEGORIAS C on A.IdCategoria = C.Id join MARCAS M on A.IdMarca = M.Id"); 
+                acceso.setearConsulta("Select A.ID, A.Codigo Codigo, A.Nombre, A.Descripcion, A.Precio, C.Descripcion Categoria, C.Id IdCategoria, M.Id IdMarca, M.Descripcion Marca From ARTICULOS A join CATEGORIAS C on A.IdCategoria = C.Id join MARCAS M on A.IdMarca = M.Id");
                 acceso.ejecutarLectura();
                 List<Articulo> lista = new List<Articulo>();
                 while (acceso.Lector.Read())
@@ -103,21 +103,20 @@ namespace Negocio
         }
 
 
-            public List<Marca> listarMarca()
-            {
+        public List<Marca> listarMarca()
+        {
             AccesoDatos acceso = new AccesoDatos();
             try
             {
                 acceso.setearConsulta("SELECT * FROM MARCAS");
                 acceso.ejecutarLectura();
                 List<Marca> marca = new List<Marca>();
-
                 while (acceso.Lector.Read())
                 {
-                    Marca mar  = new Marca();
-                    //aux.ID = (int)lector["Id"];
-                   mar.ID = (int)acceso.Lector["Id"];
-                   mar.Descripcion = (string)acceso.Lector["Descripcion"];
+
+                    Marca mar = new Marca();
+                    mar.ID = (int)acceso.Lector["Id"];
+                    mar.Descripcion = (string)acceso.Lector["Descripcion"];
 
                     marca.Add(mar);
                 }
@@ -140,11 +139,7 @@ namespace Negocio
         public void agregar(Articulo nuevo)
         {
             AccesoDatos acceso = new AccesoDatos();
-            //List<Articulo> lista = new List<Articulo>();
 
-            //SqlConnection conexion = new SqlConnection();
-            //SqlCommand comando = new SqlCommand();
-           
             try
             {
                 acceso.setearConsulta("Insert into ARTICULOS (Codigo, Nombre, Descripcion, IdCategoria, IdMarca, Precio) Values (@Codigo, @Nombre, @Descripcion, @IdCategoria, @IdMarca, @Precio)");
@@ -155,9 +150,9 @@ namespace Negocio
                 acceso.Comando.Parameters.AddWithValue("@IdCategoria", nuevo.Categoria.ID);
                 acceso.Comando.Parameters.AddWithValue("@IdMarca", nuevo.Marca.ID);
                 acceso.Comando.Parameters.AddWithValue("@Precio", nuevo.Precio);
-                
+
                 acceso.ejecutarLectura();
-                
+
             }
             catch (Exception ex)
             {
@@ -172,10 +167,6 @@ namespace Negocio
         public void modificar(Articulo existente)
         {
             AccesoDatos acceso = new AccesoDatos();
-            //List<Articulo> lista = new List<Articulo>();
-
-            //SqlConnection conexion = new SqlConnection();
-            //SqlCommand comando = new SqlCommand();
 
             try
             {
@@ -202,41 +193,23 @@ namespace Negocio
             }
         }
 
+        public void eliminar(int id)
+        {
+            AccesoDatos acceso = new AccesoDatos();
 
+            try
+            {
+                acceso.setearConsulta("Delete From ARTICULOS Where Id=@Id");
+                acceso.Comando.Parameters.AddWithValue("@Id", id);
+                acceso.ejecutarLectura();
+            }
+            catch (Exception ex)
+            {
 
-        //public void modificar(Articulo artic)
-        //{
-        //    AccesoDatos acceso = new AccesoDatos();
-        //    List<Articulo> lista = new List<Articulo>();
+                throw;
+            }
 
-        //    SqlConnection conexion = new SqlConnection();
-        //    SqlCommand comando = new SqlCommand();
-
-
-        //    try
-        //    {
-        //        acceso.setearConsulta("Update ARTICULOS set Codigo=@Codigo, Nombre=@Nombre, Descripcion=@Descripcion, IdCategoria=@IdCategoria, IdMarca=@IdMarca, Precio=@Precio where Id=@Id");
-
-        //        comando.Parameters.AddWithValue("@Id", artic.ID);
-        //        comando.Parameters.AddWithValue("@Codigo", artic.Codigo);
-        //        comando.Parameters.AddWithValue("@Nombre", artic.Nombre);
-        //        comando.Parameters.AddWithValue("@Descripcion", artic.Descripcion);               
-        //        //comando.Parameters.AddWithValue("@ImagenUrl", artic.ImagenUrl.ImagenUrl);
-        //        comando.Parameters.AddWithValue("@IdCategoria", artic.Categoria.ID);
-        //        comando.Parameters.AddWithValue("@IdMarca", artic.Marca.ID);
-        //        comando.Parameters.AddWithValue("@Precio", artic.Precio);
-        //        comando.Connection = conexion;
-
-        //        conexion.Open();
-        //        comando.ExecuteNonQuery();
-        //    }
-
-        //    catch (Exception ex)
-        //    {
-        //        throw;
-        //    }
-
-        //}
+        }
 
 
     }

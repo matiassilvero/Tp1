@@ -45,84 +45,92 @@
             // 
             this.txtFiltro.Location = new System.Drawing.Point(22, 12);
             this.txtFiltro.Name = "txtFiltro";
-            this.txtFiltro.Size = new System.Drawing.Size(299, 20);
+            this.txtFiltro.Size = new System.Drawing.Size(566, 20);
             this.txtFiltro.TabIndex = 0;
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(327, 9);
+            this.btnBuscar.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnBuscar.Location = new System.Drawing.Point(594, 10);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(84, 23);
             this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "Buscar Código";
-            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.UseVisualStyleBackColor = false;
             // 
             // dgvLista
             // 
+            this.dgvLista.BackgroundColor = System.Drawing.Color.SteelBlue;
             this.dgvLista.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLista.Location = new System.Drawing.Point(22, 59);
             this.dgvLista.Name = "dgvLista";
-            this.dgvLista.Size = new System.Drawing.Size(380, 331);
+            this.dgvLista.Size = new System.Drawing.Size(645, 331);
             this.dgvLista.TabIndex = 2;
             this.dgvLista.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvLista_CellContentClick);
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(22, 412);
+            this.btnAgregar.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnAgregar.Location = new System.Drawing.Point(164, 412);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(112, 412);
+            this.btnModificar.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnModificar.Location = new System.Drawing.Point(268, 412);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 4;
             this.btnModificar.Text = "Modificar";
-            this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.UseVisualStyleBackColor = false;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(213, 411);
+            this.btnEliminar.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.btnEliminar.Location = new System.Drawing.Point(372, 412);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 23);
             this.btnEliminar.TabIndex = 5;
             this.btnEliminar.Text = "Eliminar";
-            this.btnEliminar.UseVisualStyleBackColor = true;
+            this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
             // 
             // btnVerDetalle
             // 
+            this.btnVerDetalle.BackColor = System.Drawing.Color.LightSteelBlue;
             this.btnVerDetalle.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnVerDetalle.Location = new System.Drawing.Point(318, 411);
+            this.btnVerDetalle.Location = new System.Drawing.Point(476, 412);
             this.btnVerDetalle.Name = "btnVerDetalle";
             this.btnVerDetalle.Size = new System.Drawing.Size(75, 23);
             this.btnVerDetalle.TabIndex = 6;
             this.btnVerDetalle.Text = "Ver detalle";
-            this.btnVerDetalle.UseVisualStyleBackColor = true;
+            this.btnVerDetalle.UseVisualStyleBackColor = false;
+            this.btnVerDetalle.Click += new System.EventHandler(this.btnVerDetalle_Click);
             // 
             // pbArticulo
             // 
             this.pbArticulo.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pbArticulo.ErrorImage")));
             this.pbArticulo.Image = ((System.Drawing.Image)(resources.GetObject("pbArticulo.Image")));
-            this.pbArticulo.Location = new System.Drawing.Point(426, 59);
+            this.pbArticulo.Location = new System.Drawing.Point(700, 59);
             this.pbArticulo.Name = "pbArticulo";
             this.pbArticulo.Size = new System.Drawing.Size(252, 331);
             this.pbArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbArticulo.TabIndex = 7;
             this.pbArticulo.TabStop = false;
+            this.pbArticulo.Click += new System.EventHandler(this.pbArticulo_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.ClientSize = new System.Drawing.Size(696, 447);
+            this.ClientSize = new System.Drawing.Size(968, 447);
             this.Controls.Add(this.pbArticulo);
             this.Controls.Add(this.btnVerDetalle);
             this.Controls.Add(this.btnEliminar);

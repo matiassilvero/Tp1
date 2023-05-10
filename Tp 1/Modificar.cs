@@ -65,12 +65,8 @@ namespace Tp_1
         {
             try
             {
-                //Articulo nuevo = new Articulo();
+                //Articulo nuevo = new Articulo();      ->si se crea un nuevo artículo, se pierden todos los datos contenidos y no manda datos para actualizar
                 ArticuloNegocio negocio = new ArticuloNegocio();
-                Articulo articulo = new Articulo();
-                //if (articulo == null)
-
-                //    articulo = new Articulo();  //  si está vacio (porque no existe) lo crea. Sino, lo "recarga"
 
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
@@ -78,19 +74,7 @@ namespace Tp_1
                 articulo.Marca = (Marca)cboMarca.SelectedItem;
                 articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
                 articulo.Precio = Convert.ToDecimal(txtPrecio.Text);
-                //articulo.ImagenUrl = (Imagen)txtImagenUrl.Text;
 
-                              
-                //listaOriginal = negocio.listar();
-                //foreach (Articulo var in listaOriginal)
-                //{
-                //    if (articulo.Codigo == var.Codigo)
-                //    {
-                //        MessageBox.Show("Código de artículo repetido. Revise el código o utilice la función 'Modificar'", "Artículo repetido");
-                //        Close();
-                //        return;                       
-                //    }
-                //}
                 negocio.modificar(articulo);
                 MessageBox.Show("Operación realizada exitosamente", "Éxito");
                 Close();

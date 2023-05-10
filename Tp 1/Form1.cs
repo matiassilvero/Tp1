@@ -43,7 +43,8 @@ namespace Tp_1
             ArticuloNegocio negocio = new ArticuloNegocio();
             listaOriginal = negocio.listar();
             dgvLista.DataSource = listaOriginal;
-            //dgvLista.Columns[0].Visible = false; permite no mostrar una columna en el Form
+            dgvLista.Columns[0].Visible = false; //permite no mostrar una columna en el Form
+            dgvLista.Columns[6].Visible = false;    //aún no logro resolver lo del ImgUrl
         }
 
         //tanto el Load del Form como este tendrían que traer la imagen, pero no lo hace... mmm
@@ -83,6 +84,18 @@ namespace Tp_1
             modificar.Text = "Modificar";
             modificar.ShowDialog();
             cargar();
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            DialogResult dialogResult = MessageBox.Show("¿Confirma eliminar el artículo?", "Eliminar artículo", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                negocio.eliminar(((Articulo)dgvLista.CurrentRow.DataBoundItem).ID);
+                MessageBox.Show("Operación realizada exitosamente", "Éxito");
+                cargar();
+            }
         }
     }
 }

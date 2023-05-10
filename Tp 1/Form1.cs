@@ -97,5 +97,15 @@ namespace Tp_1
                 cargar();
             }
         }
+
+        private void btnVerDetalle_Click(object sender, EventArgs e)
+        {            
+            MessageBox.Show(((Articulo)dgvLista.CurrentRow.DataBoundItem).Descripcion, "Detalle del artículo");
+        }
+
+        private void pbArticulo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

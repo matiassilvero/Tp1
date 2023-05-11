@@ -57,6 +57,7 @@
             this.btnBuscar.TabIndex = 1;
             this.btnBuscar.Text = "Buscar Código";
             this.btnBuscar.UseVisualStyleBackColor = false;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // dgvLista
             // 

@@ -107,5 +107,13 @@ namespace Tp_1
         {
 
         }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            List<Articulo> lista = (List<Articulo>)dgvLista.DataSource;
+            List<Articulo> listaFiltrada = listaOriginal.FindAll(x => x.Codigo.ToUpper().Contains(txtFiltro.Text.ToUpper()));
+            dgvLista.DataSource = listaFiltrada;
+
+        }
     }
 }
